@@ -1,0 +1,8 @@
+.chat-main {
+  &__group-info {
+    height: 100vh;
+    width: calc(100vw - 300px);
+    background-color: #ffffff;
+    float: left;
+  }
+}
