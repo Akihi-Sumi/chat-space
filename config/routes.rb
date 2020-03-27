@@ -1,2 +1,6 @@
 Rails.application.routes.draw do
-  root to: "posts#index"
+  get 'messages/index'
+  root "messages#index"
+  # root to: "posts#index"
+end
+
