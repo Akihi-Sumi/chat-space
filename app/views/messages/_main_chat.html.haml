@@ -1,1 +1,29 @@
 .chat-main
+  .group-info
+    .left-box 
+      %h.group-info__left-box__current-group techcamp
+      %ul.group-info__left-box__member-list Member : sumi
+    .right-box Edit
+
+  .messages-list
+    .message
+      .upper-info
+        %p.messages-list__message__upper-info__talker sumi
+        %p.messages-list__message__upper-info__date 2020/03/23(Mon) 17:45
+      .text
+        %p.messages-list__message__upper-info__text おはよう
+    .message
+      .second-info
+        %p.messages-list__message__second-info__talker2 sumi
+        %p.messages-list__message__second-info__date2 2020/03/23(Mon) 19:08
+      .text2
+        %p.messages-list__message__second-info__text2 おそよー
+
+  .message-form
+    %form.message-form
+      .input-box
+        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
+        %label{class: "input-box__image"}
+          = icon('fas', 'image')
+          %input{type: "file", class: "input-box__image__file"}
+      %input{type: "sumit", class: "submit-btn", placeholder: "Send"}    
