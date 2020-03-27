@@ -1,1 +1,16 @@
 .side-bar
+  .user-name
+    .user-name__top-items
+      %p.user-name__top-items__name sumi
+      %ul.user-name__top-items__menu
+        %li
+          = link_to "#", class: "a" do
+            = icon('fas', 'edit')
+          = link_to "#", class: "a" do
+            = icon('fas', 'cog')
+  .group-list
+    .group
+      %p.group__group-name techcamp
+      %p.group__message まだメッセージがありません
+        
+
