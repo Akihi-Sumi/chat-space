@@ -39,11 +39,11 @@
 
     .group {
       margin-bottom: 40px;
-      .group__group-name {
+      &__group-name {
         font-size: 15px;
         margin-bottom: 5px;
       }
-      .group__message {
+      &__message {
         font-size: 11px;
       }
     }
