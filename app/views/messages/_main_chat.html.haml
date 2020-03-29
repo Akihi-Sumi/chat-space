@@ -20,10 +20,12 @@
         %p.messages-list__message__second-info__text2 おそよー
 
   .message-form
-    %form.message-form
-      .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fas', 'image')
-          %input{type: "file", class: "input-box__image__file"}
-      %input{type: "sumit", class: "submit-btn", placeholder: "Send"}    
+    %form.message-form 
+      = form_for [@group, @message] do |f|
+        .input-box  
+          %input{type: "text", class: "input-box__text", placeholder: "type a message"}
+          %label{class: "input-box__image"}
+            = icon('fas', 'image') 
+            %input{type: "file", class: "input-box__image__file"}
+        %input{type: "sumit", class: "submit-btn", placeholder: "Send"}   
+          = f.submit 'Send', class: 'form__submit' 
