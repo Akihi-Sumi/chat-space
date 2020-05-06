@@ -1,9 +1,14 @@
 .chat-main
   .group-info
     .left-box 
-      %h.group-info__left-box__current-group techcamp
-      %ul.group-info__left-box__member-list Member : sumi
-    .right-box Edit
+      .group-info__left-box__current-group 
+        = @group.name
+      %ul.group-info__left-box__member-list 
+        Member :
+        - @group.users.each do |user|
+          = user.name
+    .right-box 
+      = link_to "Edit", edit_group_path(@group.id), class: "c" do
 
   .messages
     = render @messages
