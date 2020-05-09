@@ -1,7 +1,7 @@
 $(function(){
   function buildHTML(message){
     if ( message.image ) {
-      var html =`<div class="message">
+      var html =`<div class="message" data-message-id=${message.id}>
                   <div class="upper-message">
                     <div class="upper-message__user-name">
                       ${message.user_name}
@@ -19,7 +19,7 @@ $(function(){
                 </div>`
       return html;
     } else {
-      var html =`<div class="message">
+      var html =`<div class="message" data-message-id=${message.id}>
                   <div class="upper-message">
                     <div class="upper-message__user-name">
                       ${message.user_name}
@@ -42,11 +42,6 @@ $(function(){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $(this).attr('action');
-    var $this = $(this);
-
-    // $('.submit-btn').removeAttr('data-disable-with');
-    // var fd = new FormData($this.get(0));         復習で見返した時に思い出せるよう残しておく
-
     $.ajax({
       url: url,
       type: "POST",
@@ -55,15 +50,47 @@ $(function(){
       processData: false,
       contentType: false
     })
+
     .done(function(data){
-      var html = buildHTML(data);
-      $('.messages').append(html)
-      $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
-      $('form')[0].reset();
-      $('.submit-btn').prop('disabled', false);
-    })
-    .fail(function() {
-      alert("メッセージ送信に失敗しました");
+        var html = buildHTML(data);
+        $('.messages').append(html)
+        $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+        $('form')[0].reset();
+      })
+      .always(function(){
+        $('.submit-btn').prop('disabled', false);
+      })
+      .fail(function() {
+        alert("メッセージ送信に失敗しました");d
+      });
     });
-  });
+    // $('.submit-btn').removeAttr('data-disable-with');
+    // var fd = new FormData($this.get(0));         復習で見返した時に思い出せるよう残しておく
+
+    var reloadMessages = function() {
+      var last_message_id = $('.message:last').data("message-id");
+      console.log(last_message_id)
+      $.ajax({
+        url: "api/messages",
+        type: "GET",
+        dataType: 'json',
+        data: {id: last_message_id}
+      })
+      .done(function(messages){
+        if (messages.length !== 0) {
+        var insertHTML = '';
+          $.each(messages, function(i, message) {
+            insertHTML += buildHTML(message)
+          });
+          $('.messages').append(insertHTML);
+          $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
+        }
+      })
+      .fail(function() {
+        alert("error");d
+      });
+    };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
