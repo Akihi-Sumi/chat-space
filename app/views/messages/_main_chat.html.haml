@@ -8,7 +8,7 @@
         - @group.users.each do |user|
           = user.name
     .right-box 
-      = link_to "Edit", edit_group_path(@group.id)
+      = link_to "Edit", edit_group_path(@group.id), class: "c" 
 
   .messages
     = render @messages
